@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Fetching</title>
+</head>
+<body>
+    <h1>Own Data</h1>
+    <input type="text" id="input">
+    <button id="button"> GET DATA</button>
+
+    <h1>Outside data</h1>
+    <input type="text" name="" id="input2"/>
+    <button id="button2">GET DATA</button>
+    
+
+    <script>
+        const input = document.getElementById('input');
+        const button = document.getElementById('button');
+
+        const resAPI = async (e) =>{
+            e.preventDefault();
+
+            const res = await fetch('http://localhost:8000/message', {
+                method: 'GET'
+            })
+            console.log(res);
+
+            const data = await res.json();
+
+            input.value = data.message;
+        }
+
+        button.addEventListener('click', resAPI)
+
+        const input2 = document.getElementById('input2');
+        const button2 = document.getElementById('button2');
+
+        const resAPI2 = async (e) => {
+            const res = await fetch('https://jsonplaceholder.typicode.com/todos/1', {
+                method: 'GET'
+            })
+
+            console.log(res)
+
+            const data = await res.json();
+
+            input2.value = data.title;
+        }
+        
+        button2.addEventListener('click', resAPI2)
+
+
+    </script>
+</body>
+</html>
